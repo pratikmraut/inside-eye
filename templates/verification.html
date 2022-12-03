@@ -1,0 +1,41 @@
+{% extends "new.html" %}
+
+{% block content %}
+<div class="container">
+    
+    <div class="card">
+        <div class="signup-form" style="margin-top: 50px; ">
+            <form method="post" action="/verification/" enctype="multipart/form-data">
+
+                <div class="form-floating mb-3" >
+                    <label for="floatingInput" required>Full Name:</label>
+                    <input type="name" class="form-control" id="floatingInput" placeholder="Pratik Mukkharu Raut">    
+                </div></br>
+        
+                <div class="form-group">
+                    {% if msg %}
+                    <div class="alert alert-info" role="alert">
+                        <ul>
+                            <li>{{ msg }}</li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <label for="tags">Upload File:</label>
+                        <input type="file" class="form-control" name="file" placeholder="select a file to upload"
+                            required>
+                        <br />
+                        <input type="submit" name="submit" class="btn btn-success btn-lg btn-block"
+                            value="Upload File">
+
+                        <br />
+                        <input type="submit" name="Verify" class="btn btn-success btn-lg btn-block"
+                            value="Verify">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div></br>
+
+</div>
+{% endblock %}

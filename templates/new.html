@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href= "/static/css/new_styles.scss"></link>
+  <link rel="stylesheet" href= "/static/css/upload_css.scss"></link>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a id="Upload" class="hoverable" href="/upload">Upload</a></li>
+          <li><a id="Verification" class="hoverable" href="/verification">Verification</a></li>
+          <li><a id="Profile" class="hoverable" href="/profile">Profile</a></li>
+          <li><a id="Contact" class="hoverable" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  {% block content %}
+  {# Template inserted here #}
+  {% endblock %}
+  <script src= "/static/js/new_script.js"></script>
+  <script src= "/static/js/upload_script.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</body>
+</html>

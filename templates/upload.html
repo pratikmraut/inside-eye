@@ -1,0 +1,32 @@
+{% extends "new.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+      <h3>Upload Resume</h3>
+      <strong>Name:</strong> {{ session['user']['name'] }}<br>
+      <strong>Email:</strong> {{ session['user']['email'] }}
+      <div class="signup-form" style="margin-top: 50px; ">
+        <form method="post" action="/upload/" enctype="multipart/form-data">
+            <div class="form-group">
+                {% if msg %}
+                <div class="alert alert-info" role="alert">
+                    <ul>
+                        <li>{{ msg }}</li>
+                    </ul>
+                </div>
+                {% endif %}
+                <div>
+                    <label for="tags">Upload File:</label>
+                    <input type="file" class="form-control" name="file" placeholder="select a file to upload" required>
+                    <br />
+                    <input type="submit" name="submit" class="btn btn-success btn-lg btn-block" value="Upload File">
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+  </div>    
+</div>
+{% endblock %}
