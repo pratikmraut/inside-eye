@@ -3,15 +3,11 @@
 {% block content %}
 
 <div class="card">
+<div id="qr-reader" style="width:500px"></div>
+<div id="qr-reader-results"></div>
 
-  <h2 class="center">Your Info</h2>
-
-  <p>
-    <strong>ID:</strong> {{ session['user']['_id'] }}<br>
-    <strong>Name:</strong> {{ session['user']['name'] }}<br>
-    <strong>Email:</strong> {{ session['user']['email'] }}
-  </p>
-
+<script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
+<script src="html5-qrcode-demo.js"></script>
 </div>
 
 {% endblock %}
