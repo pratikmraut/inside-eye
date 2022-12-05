@@ -10,3 +10,4 @@ share/
 pyvenv.cfg
 *.venv/
 extra/
+help.txt/

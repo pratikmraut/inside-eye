@@ -73,9 +73,18 @@ app.config["UPLOAD_DIR"] = "uploads"
 @login_required
 def upload():
   print(request.method)
+
+  def resume(filename):
+    file_data = parser.from_file(os.path.join(app.config['UPLOAD_DIR'], filename))
+    text = file_data['content']
+    print(text)
+
   if request.method == 'POST':
       file = request.files['file']
       file.save(os.path.join(app.config['UPLOAD_DIR'], file.filename))
+
+      resume(file.filename)
+
       return render_template("upload.html", msg = "File uplaoded successfully.")
   return render_template("upload.html", msg = "")
     
@@ -86,6 +95,7 @@ def upload():
 #   return render_template('verification.html')
 
 
+
 app.config["UPLOAD_DIR"] = "uploads"
 @app.route("/verification/", methods = ["GET", "POST"])
 @login_required
@@ -93,7 +103,27 @@ def verification():
   
   print(request.method)
 
-  def read_qr_code(filename):
+  def hsc(hsc_txt):
+    var = hsc_txt.split()
+    # print(var[16]) #530
+    hsc_marks = int(var[16])
+    print(hsc_marks) #530
+    per = float(hsc_marks/6.5)
+    print('%.2f'%per) #81.53
+
+  def ssc(ssc_text):
+    # print(len(ssc_text)) #93
+    #len(93)-13
+    # print(ssc_text[:80]) #Raut....457
+    var = ssc_text[:80] 
+    # print(var[77:]) #457
+    ssc_marks = int(var[77:])
+    print(ssc_marks) #457
+    per_s = float(ssc_marks/5)
+    print('%.2f'%per_s) #91.40
+
+
+  def read_qr_code(filename, mode):
     image = cv2.imread(os.path.join(app.config['UPLOAD_DIR'], filename))
 
     decodedObjects = pyzbar.decode(image)
@@ -102,17 +132,36 @@ def verification():
         # print("Data:  b'www.copyassignment.com'")
         print("Type:", obj.type)
         print("Data: ", obj.data, "\n")
-  def resume(filename):
-    file_data = parser.from_file(os.path.join(app.config['UPLOAD_DIR'], filename))
-    text = file_data['content']
-    print(text)
+        
+        if(mode == 'hsc'):
+          hsc(obj.data)
+
+        elif(mode == 'ssc'):
+          hsc(obj.data)
+        
+        else:
+          pass
 
   if request.method == 'POST':
-      file = request.files['file']
-      file.save(os.path.join(app.config['UPLOAD_DIR'], file.filename))
+      # file = request.files['file']
+      # file.save(os.path.join(app.config['UPLOAD_DIR'], file.filename))
       # print(read_qr_code(file.filename))
-      resume(file.filename)
+      # print(request.files['aadhar'].filename)
 
+      file1 = request.files['aadhar']
+      file1.save(os.path.join(app.config['UPLOAD_DIR'], file1.filename))
+      # read_qr_code(file1.filename, 'aadhar')
+
+      file2 = request.files['hsc']
+      file2.save(os.path.join(app.config['UPLOAD_DIR'], file2.filename))
+      read_qr_code(file2.filename, 'hsc')
+
+      file3 = request.files['ssc']
+      file3.save(os.path.join(app.config['UPLOAD_DIR'], file3.filename))
+      # read_qr_code(file3.filename, 'ssc')
+
+      # print(file)
+      
       return render_template("verification.html", msg = "File uplaoded successfully.")
   return render_template("verification.html", msg = "")
 
